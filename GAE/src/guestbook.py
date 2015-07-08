@@ -69,9 +69,10 @@ class MainPage(webapp2.RequestHandler):
         for greeting in greetings:
             if greeting.author:
                 author = greeting.author.email
+                at_date = greeting.date.strftime("%Y-%m-%d %H:%M")
                 if user and user.user_id() == greeting.author.identity:
                     author += ' (You)'
-                self.response.write('<b>%s</b> wrote:' % author)
+                self.response.write('<b>%s</b> wrote at %s:' % (author, at_date) )
             else:
                 self.response.write('An anonymous person wrote:')
             self.response.write('<blockquote>%s</blockquote>' %
